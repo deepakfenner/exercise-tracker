@@ -29,6 +29,24 @@ const getworkout=(async(req,res)=>{
 //create a new workout(post)
 const createworkout=(async(req,res)=>{
     const{title,load,reps}=req.body
+
+    let emptyfields=[];
+    if(!title)
+    {
+        emptyfields.push(title);
+    }
+    if(!load)
+    {
+        emptyfields.push(load);
+    }
+    if(!reps)
+    {
+        emptyfields.push(reps);
+    }
+    if(emptyfields.length>0)
+    {
+        return res.status(400).json({error:'Please fill all the details',emptyfields});
+    }
     try{
         //storing collection to db using model(the collection is called "workout")
         const workout=await Workout.create({title,load,reps})
