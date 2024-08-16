@@ -1,8 +1,9 @@
 const express=require('express')
 //importing the function to handle the routes
 const{createworkout,getworkouts,getworkout,deleteworkout,updateworkout}=require('../controllers/workoutcontroller')
+const requireAuth=require('../middleware/requireAuth')
 const router=express.Router();
-
+router.use(requireAuth)
 //get all the workouts
 router.get("/",getworkouts)
 //get a single workout
